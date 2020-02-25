@@ -1,7 +1,11 @@
 package com.example.android.githubsearchwithsqlite;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
@@ -22,16 +26,20 @@ import android.widget.TextView;
 
 import com.example.android.githubsearchwithsqlite.data.GitHubRepo;
 import com.example.android.githubsearchwithsqlite.data.Status;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements GitHubSearchAdapter.OnSearchResultClickListener {
+public class MainActivity extends AppCompatActivity
+        implements GitHubSearchAdapter.OnSearchResultClickListener, NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private RecyclerView mSearchResultsRV;
     private EditText mSearchBoxET;
     private ProgressBar mLoadingIndicatorPB;
     private TextView mErrorMessageTV;
+    private DrawerLayout mDrawerLayout;
+
     private GitHubSearchAdapter mGitHubSearchAdapter;
 
     private GitHubSearchViewModel mViewModel;
@@ -41,6 +49,13 @@ public class MainActivity extends AppCompatActivity implements GitHubSearchAdapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_nav_menu);
 
         mSearchBoxET = findViewById(R.id.et_search_box);
         mSearchResultsRV = findViewById(R.id.rv_search_results);
@@ -53,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements GitHubSearchAdapt
 
         mLoadingIndicatorPB = findViewById(R.id.pb_loading_indicator);
         mErrorMessageTV = findViewById(R.id.tv_error_message);
+
+        mDrawerLayout = findViewById(R.id.drawer_layout);
 
         mViewModel = new ViewModelProvider(this).get(GitHubSearchViewModel.class);
 
@@ -90,6 +107,9 @@ public class MainActivity extends AppCompatActivity implements GitHubSearchAdapt
                 }
             }
         });
+
+        NavigationView navigationView = findViewById(R.id.nv_nav_drawer);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -101,12 +121,34 @@ public class MainActivity extends AppCompatActivity implements GitHubSearchAdapt
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
             case R.id.action_settings:
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        mDrawerLayout.closeDrawers();
+        switch (item.getItemId()) {
+            case R.id.nav_search:
+                return true;
+            case R.id.nav_saved_repos:
+                Intent savedReposIntent = new Intent(this, SavedReposActivity.class);
+                startActivity(savedReposIntent);
+                return true;
+            case R.id.nav_settings:
+                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                startActivity(settingsIntent);
+                return true;
+            default:
+                return false;
         }
     }
 
