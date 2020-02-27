@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.githubsearchwithsqlite.data.GitHubRepo;
@@ -20,6 +22,7 @@ public class RepoDetailActivity extends AppCompatActivity {
     public static final String EXTRA_GITHUB_REPO = "GitHubRepo";
 
     private GitHubRepo mRepo;
+    private boolean mIsSaved = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,21 @@ public class RepoDetailActivity extends AppCompatActivity {
             TextView repoStarsTV = findViewById(R.id.tv_repo_stars);
             repoStarsTV.setText(Integer.toString(mRepo.stargazers_count));
         }
+
+        final ImageView repoBookmarkIV = findViewById(R.id.iv_repo_bookmark);
+        repoBookmarkIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mRepo != null) {
+                    mIsSaved = !mIsSaved;
+                    if (mIsSaved) {
+                        repoBookmarkIV.setImageResource(R.drawable.ic_bookmark_black_24dp);
+                    } else {
+                        repoBookmarkIV.setImageResource(R.drawable.ic_bookmark_border_black_24dp);
+                    }
+                }
+            }
+        });
     }
 
     @Override
