@@ -1,8 +1,12 @@
 package com.example.android.githubsearchwithsqlite.data;
 
+import java.util.List;
+
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.Query;
 
 @Dao
 public interface SavedReposDao {
@@ -11,4 +15,7 @@ public interface SavedReposDao {
 
     @Delete
     void delete(GitHubRepo repo);
+
+    @Query("SELECT * FROM repos")
+    LiveData<List<GitHubRepo>> getAllRepos();
 }

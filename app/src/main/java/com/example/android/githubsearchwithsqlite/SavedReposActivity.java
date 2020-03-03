@@ -1,6 +1,8 @@
 package com.example.android.githubsearchwithsqlite;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,7 +12,11 @@ import android.os.Bundle;
 import com.example.android.githubsearchwithsqlite.data.GitHubRepo;
 import com.example.android.githubsearchwithsqlite.utils.GitHubUtils;
 
+import java.util.List;
+
 public class SavedReposActivity extends AppCompatActivity implements GitHubSearchAdapter.OnSearchResultClickListener {
+
+    private SavedReposViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +27,20 @@ public class SavedReposActivity extends AppCompatActivity implements GitHubSearc
         savedReposRV.setLayoutManager(new LinearLayoutManager(this));
         savedReposRV.setHasFixedSize(true);
 
-        GitHubSearchAdapter adapter = new GitHubSearchAdapter(this);
+        final GitHubSearchAdapter adapter = new GitHubSearchAdapter(this);
         savedReposRV.setAdapter(adapter);
+
+        mViewModel = new ViewModelProvider(
+                this,
+                new ViewModelProvider.AndroidViewModelFactory(getApplication())
+            ).get(SavedReposViewModel.class);
+
+        mViewModel.getAllRepos().observe(this, new Observer<List<GitHubRepo>>() {
+            @Override
+            public void onChanged(List<GitHubRepo> gitHubRepos) {
+                adapter.updateSearchResults(gitHubRepos);
+            }
+        });
     }
 
     @Override
