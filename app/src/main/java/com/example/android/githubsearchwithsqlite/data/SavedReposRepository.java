@@ -27,6 +27,10 @@ public class SavedReposRepository {
         return mDAO.getAllRepos();
     }
 
+    public LiveData<GitHubRepo> getRepoByName(String fullName) {
+        return mDAO.getRepoByName(fullName);
+    }
+
     private static class InsertAsyncTask extends AsyncTask<GitHubRepo, Void, Void> {
         private SavedReposDao mAsyncTaskDAO;
         InsertAsyncTask(SavedReposDao dao) {

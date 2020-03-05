@@ -2,6 +2,7 @@ package com.example.android.githubsearchwithsqlite;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -56,14 +57,24 @@ public class RepoDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mRepo != null) {
-                    mIsSaved = !mIsSaved;
-                    if (mIsSaved) {
-                        repoBookmarkIV.setImageResource(R.drawable.ic_bookmark_black_24dp);
+                    if (!mIsSaved) {
                         mViewModel.insertSavedRepo(mRepo);
                     } else {
-                        repoBookmarkIV.setImageResource(R.drawable.ic_bookmark_border_black_24dp);
                         mViewModel.deleteSavedRepo(mRepo);
                     }
+                }
+            }
+        });
+
+        mViewModel.getRepoByName(mRepo.full_name).observe(this, new Observer<GitHubRepo>() {
+            @Override
+            public void onChanged(GitHubRepo repo) {
+                if (repo != null) {
+                    mIsSaved = true;
+                    repoBookmarkIV.setImageResource(R.drawable.ic_bookmark_black_24dp);
+                } else {
+                    mIsSaved = false;
+                    repoBookmarkIV.setImageResource(R.drawable.ic_bookmark_border_black_24dp);
                 }
             }
         });

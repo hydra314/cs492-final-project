@@ -29,4 +29,8 @@ public class SavedReposViewModel extends AndroidViewModel {
     public LiveData<List<GitHubRepo>> getAllRepos() {
         return mRepository.getAllRepos();
     }
+
+    public LiveData<GitHubRepo> getRepoByName(String fullName) {
+        return mRepository.getRepoByName(fullName);
+    }
 }
