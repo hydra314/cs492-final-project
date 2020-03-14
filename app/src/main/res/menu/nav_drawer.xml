@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_saved_recipes"
+        android:title="@string/nav_saved_recipes"
+        android:icon="@drawable/ic_nav_saved_recipes" />
 
     <item
         android:id="@+id/nav_search"
@@ -7,13 +11,7 @@
         android:icon="@drawable/ic_nav_search" />
 
     <item
-        android:id="@+id/nav_saved_repos"
-        android:title="@string/nav_saved_repos"
-        android:icon="@drawable/ic_nav_saved_repos" />
-
-    <item
-        android:id="@+id/nav_settings"
-        android:title="@string/nav_settings"
-        android:icon="@drawable/ic_nav_settings" />
+        android:id="@+id/nav_browse"
+        android:title="@string/nav_browse" />
 
 </menu>

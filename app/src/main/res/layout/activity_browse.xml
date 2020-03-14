@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SavedReposActivity">
+    tools:context=".BrowseActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_saved_repos"
+        android:id="@+id/rv_browse_recipes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp" />
