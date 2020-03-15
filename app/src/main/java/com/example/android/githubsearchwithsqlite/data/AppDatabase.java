@@ -6,7 +6,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {GitHubRepo.class}, version = 1)
+@Database(entities = {Recipes.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract SavedReposDao savedReposDao();
     private static volatile AppDatabase INSTANCE;
@@ -18,7 +18,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(
                             context.getApplicationContext(),
                             AppDatabase.class,
-                            "github_repos_db"
+                            "recipes_db"
                     ).build();
                 }
             }

@@ -12,15 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SavedReposActivity"
-            android:parentActivityName=".MainActivity"/>
-        <activity
-            android:name=".SettingsActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".RepoDetailActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">

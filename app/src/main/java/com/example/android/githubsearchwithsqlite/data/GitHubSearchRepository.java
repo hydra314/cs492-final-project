@@ -3,8 +3,6 @@ package com.example.android.githubsearchwithsqlite.data;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.example.android.githubsearchwithsqlite.utils.GitHubUtils;
-
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
