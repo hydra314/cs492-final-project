@@ -1,0 +1,56 @@
+package com.example.android.githubsearchwithsqlite.data;
+
+import android.app.Application;
+import android.os.AsyncTask;
+
+import com.example.android.githubsearchwithsqlite.utils.EdamamUtils;
+import androidx.lifecycle.LiveData;
+
+import java.util.List;
+
+public class SavedRecipesRepository {
+    private SavedRecipesDao mDAO;
+
+    public SavedRecipesRepository(Application application) {
+        AppDatabase db = AppDatabase.getDatabase(application);
+        mDAO = db.savedReposDao();
+    }
+
+    public void insertSavedRecipe(Recipes recipe) {
+        new InsertAsyncTask(mDAO).execute(recipe);
+    }
+
+    public void deleteSavedRepo(Recipes recipe) {
+        new DeleteAsyncTask(mDAO).execute(recipe);
+    }
+
+    public LiveData<List<Recipes>> getAllRecipes() {
+        return mDAO.getAllRecipes();
+    }
+
+    private static class InsertAsyncTask extends AsyncTask<Recipes, Void, Void> {
+        private SavedRecipesDao mAsyncTaskDAO;
+        InsertAsyncTask(SavedRecipesDao dao) {
+            mAsyncTaskDAO = dao;
+        }
+
+        @Override
+        protected Void doInBackground(SavedRecipesDao... gitHubRepos) {
+            mAsyncTaskDAO.insert(gitHubRepos[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteAsyncTask extends AsyncTask<Recipes, Void, Void> {
+        private SavedRecipesDao mAsyncTaskDAO;
+        DeleteAsyncTask(SavedRecipesDao dao) {
+            mAsyncTaskDAO = dao;
+        }
+
+        @Override
+        protected Void doInBackground(SavedRecipesDao... gitHubRepos) {
+            mAsyncTaskDAO.delete(gitHubRepos[0]);
+            return null;
+        }
+    }
+}

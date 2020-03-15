@@ -2,20 +2,20 @@ package com.example.android.githubsearchwithsqlite.data;
 
 import android.os.AsyncTask;
 
-import com.example.android.githubsearchwithsqlite.utils.GitHubUtils;
+import com.example.android.githubsearchwithsqlite.utils.EdamamUtils;
 import com.example.android.githubsearchwithsqlite.utils.NetworkUtils;
 
 import java.io.IOException;
 import java.util.List;
 
-public class GitHubSearchAsyncTask extends AsyncTask<String, Void, String> {
+public class RecipeSearchAsyncTask extends AsyncTask<String, Void, String> {
     private Callback mCallback;
 
     public interface Callback {
-        void onSearchFinished(List<GitHubRepo> searchResults);
+        void onSearchFinished(List<Recipes> searchResults);
     }
 
-    public GitHubSearchAsyncTask(Callback callback) {
+    public RecipeSearchAsyncTask(Callback callback) {
         mCallback = callback;
     }
 
@@ -33,9 +33,9 @@ public class GitHubSearchAsyncTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String s) {
-        List<GitHubRepo> searchResults = null;
+        List<Recipes> searchResults = null;
         if (s != null) {
-            searchResults = GitHubUtils.parseGitHubSearchResults(s);
+            searchResults = EdamamUtils.parseRecipeSearchResults(s);
         }
         mCallback.onSearchFinished(searchResults);
     }
