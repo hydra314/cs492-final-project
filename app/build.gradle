@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.example.android.githubsearchwithsqlite"
+        applicationId "com.example.android.cooking101"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -32,6 +32,7 @@ dependencies {
 
     implementation 'com.squareup.okhttp3:okhttp:4.3.1'
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
 
     annotationProcessor 'androidx.room:room-compiler:2.2.4'
 

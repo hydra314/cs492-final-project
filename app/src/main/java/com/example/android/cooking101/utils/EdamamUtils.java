@@ -1,12 +1,10 @@
-package com.example.android.githubsearchwithsqlite.utils;
+package com.example.android.cooking101.utils;
 
 import android.net.Uri;
-import android.util.Log;
 
-import com.example.android.githubsearchwithsqlite.data.Recipes;
+import com.example.android.cooking101.data.Recipes;
 import com.google.gson.Gson;
 
-import java.net.URI;
 import java.util.ArrayList;
 
 public class EdamamUtils {
@@ -37,6 +35,7 @@ public class EdamamUtils {
         String source;
         String source_url;
         double calories;
+        double yield;
     }
 
     public static String buildEdamamSearchURL(String q) {
@@ -57,9 +56,11 @@ public class EdamamUtils {
             for(RecipeListItem listItem : results.hits) {
                 Recipes recipe = new Recipes();
                 recipe.label = listItem.recipe.label;
+                recipe.image = listItem.recipe.image;
                 recipe.calories = (int)listItem.recipe.calories;
                 recipe.source = listItem.recipe.source;
                 recipe.source_url = listItem.recipe.source_url;
+                recipe.servings = Integer.toString((int)listItem.recipe.yield);
 
                 recipeItems.add(recipe);
             }

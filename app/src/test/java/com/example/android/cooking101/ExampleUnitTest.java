@@ -1,4 +1,4 @@
-package com.example.android.githubsearchwithsqlite;
+package com.example.android.cooking101;
 
 import org.junit.Test;
 

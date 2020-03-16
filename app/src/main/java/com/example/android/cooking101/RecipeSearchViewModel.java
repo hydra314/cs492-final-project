@@ -1,8 +1,8 @@
-package com.example.android.githubsearchwithsqlite;
+package com.example.android.cooking101;
 
-import com.example.android.githubsearchwithsqlite.data.Recipes;
-import com.example.android.githubsearchwithsqlite.data.RecipeSearchRepository;
-import com.example.android.githubsearchwithsqlite.data.Status;
+import com.example.android.cooking101.data.Recipes;
+import com.example.android.cooking101.data.RecipeSearchRepository;
+import com.example.android.cooking101.data.Status;
 
 import java.util.List;
 

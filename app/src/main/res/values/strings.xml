@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GitHub Search</string>
+    <string name="app_name">Cooking101</string>
     <string name="search_box_hint">Search GitHub...</string>
     <string name="search_button_text">Do Search</string>
     <string name="loading_error">We were unable to execute your query.  Check your internet connection.</string>

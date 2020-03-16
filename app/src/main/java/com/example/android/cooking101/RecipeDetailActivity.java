@@ -1,4 +1,4 @@
-package com.example.android.githubsearchwithsqlite;
+package com.example.android.cooking101;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.android.githubsearchwithsqlite.data.Recipes;
+import com.example.android.cooking101.data.Recipes;
 
 public class RecipeDetailActivity extends AppCompatActivity {
     public static final String EXTRA_RECIPE = "Recipe";

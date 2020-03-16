@@ -1,8 +1,8 @@
-package com.example.android.githubsearchwithsqlite.data;
+package com.example.android.cooking101.data;
 
 import android.util.Log;
 
-import com.example.android.githubsearchwithsqlite.utils.EdamamUtils;
+import com.example.android.cooking101.utils.EdamamUtils;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
