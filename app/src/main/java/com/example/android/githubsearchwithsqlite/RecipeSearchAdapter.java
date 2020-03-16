@@ -6,12 +6,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
+import android.util.Log;
 import com.example.android.githubsearchwithsqlite.data.Recipes;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RecipeSearchAdapter extends RecyclerView.Adapter<RecipeSearchAdapter.SearchResultViewHolder> {
+    private static final String TAG = RecipeSearchAdapter.class.getSimpleName();
     private List<Recipes> mSearchResultsList;
     private OnSearchResultClickListener mResultClickListener;
 
@@ -50,26 +52,26 @@ public class RecipeSearchAdapter extends RecyclerView.Adapter<RecipeSearchAdapte
         holder.bind(mSearchResultsList.get(position));
     }
 
-    class SearchResultViewHolder extends RecyclerView.ViewHolder {
+    class SearchResultViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mSearchResultTV;
 
         SearchResultViewHolder(View itemView) {
             super(itemView);
-            mSearchResultTV = itemView.findViewById(R.id.tv_recipe_name);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mResultClickListener.onSearchResultClicked(
-                            mSearchResultsList.get(getAdapterPosition())
-                    );
-                }
-            });
+            mSearchResultTV = itemView.findViewById(R.id.tv_recipe_title);
+            itemView.setOnClickListener(this);
         }
 
         void bind(Recipes recipe) {
+            Log.d(TAG, recipe.label);
             mSearchResultTV.setText(recipe.label);
         }
+
+        @Override
+        public void onClick(View v) {
+            Recipes recipe = mSearchResultsList.get(getAdapterPosition());
+            mResultClickListener.onSearchResultClicked(recipe);
+        }
+
     }
 
 }
