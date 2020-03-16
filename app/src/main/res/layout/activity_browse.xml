@@ -13,4 +13,21 @@
         android:layout_height="match_parent"
         android:padding="8dp" />
 
+    <TextView
+        android:id="@+id/tv_browse_error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="20sp"
+        android:padding="16dp"
+        android:visibility="invisible"
+        android:text="@string/loading_error"/>
+
+    <ProgressBar
+        android:id="@+id/pb_browse_loading_indicator"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="32dp"
+        android:visibility="invisible"/>
+
 </LinearLayout>

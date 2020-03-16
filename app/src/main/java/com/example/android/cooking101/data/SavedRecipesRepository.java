@@ -26,6 +26,7 @@ public class SavedRecipesRepository {
     public LiveData<List<Recipes>> getAllRecipes() {
         return mDAO.getAllRecipes();
     }
+    public LiveData<Recipes> getRecipeByName(String name) { return mDAO.getRecipeByName(name);}
 
     private static class InsertAsyncTask extends AsyncTask<Recipes, Void, Void> {
         private SavedRecipesDao mAsyncTaskDAO;

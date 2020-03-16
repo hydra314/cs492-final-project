@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
-
         NavigationView navigationView = findViewById(R.id.nv_nav_drawer);
         navigationView.setNavigationItemSelectedListener(this);
     }
