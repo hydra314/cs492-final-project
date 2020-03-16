@@ -19,4 +19,7 @@ public interface SavedRecipesDao {
     @Query("SELECT * FROM recipes")
     LiveData<List<Recipes>> getAllRecipes();
 
+    @Query("SELECT * FROM recipes WHERE label = :name LIMIT 1")
+    LiveData<Recipes> getRecipeByName(String name);
+
 }
