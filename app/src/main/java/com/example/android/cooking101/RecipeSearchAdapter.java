@@ -1,4 +1,4 @@
-package com.example.android.githubsearchwithsqlite;
+package com.example.android.cooking101;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 import android.util.Log;
-import com.example.android.githubsearchwithsqlite.data.Recipes;
+import com.example.android.cooking101.data.Recipes;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -62,6 +62,7 @@ public class RecipeSearchAdapter extends RecyclerView.Adapter<RecipeSearchAdapte
         SearchResultViewHolder(View itemView) {
             super(itemView);
             mSearchResultTV = itemView.findViewById(R.id.tv_recipe_title);
+            mSearchResultDescriptionTV = itemView.findViewById(R.id.tv_recipe_description);
             mRecipeImage = itemView.findViewById(R.id.iv_recipe_image);
             itemView.setOnClickListener(this);
         }
@@ -69,7 +70,7 @@ public class RecipeSearchAdapter extends RecyclerView.Adapter<RecipeSearchAdapte
         void bind(Recipes recipe) {
             Log.d(TAG, recipe.label);
             mSearchResultTV.setText(recipe.label);
-            /*Glide.with(mRecipeImage.getContext()).load(recipe.image).into(mRecipeImage);*/
+            Glide.with(mRecipeImage.getContext()).load(recipe.image).into(mRecipeImage);
 
             String description = recipe.servings + " Servings | " + recipe.calories + " Calories";
             mSearchResultDescriptionTV.setText(description);

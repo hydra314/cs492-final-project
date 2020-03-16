@@ -1,7 +1,6 @@
-package com.example.android.githubsearchwithsqlite.data;
+package com.example.android.cooking101.data;
 
 import java.io.Serializable;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;

@@ -1,9 +1,9 @@
-package com.example.android.githubsearchwithsqlite.data;
+package com.example.android.cooking101.data;
 
 import android.os.AsyncTask;
 
-import com.example.android.githubsearchwithsqlite.utils.EdamamUtils;
-import com.example.android.githubsearchwithsqlite.utils.NetworkUtils;
+import com.example.android.cooking101.utils.EdamamUtils;
+import com.example.android.cooking101.utils.NetworkUtils;
 
 import java.io.IOException;
 import java.util.List;
