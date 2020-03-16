@@ -17,4 +17,6 @@ public class Recipes implements Serializable {
     public String servings;
     public String source;
     public String source_url;
+
+    public String image; 
 }

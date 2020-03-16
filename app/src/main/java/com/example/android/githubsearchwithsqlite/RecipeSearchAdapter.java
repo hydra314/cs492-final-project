@@ -3,7 +3,9 @@ package com.example.android.githubsearchwithsqlite;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 import android.util.Log;
@@ -54,16 +56,23 @@ public class RecipeSearchAdapter extends RecyclerView.Adapter<RecipeSearchAdapte
 
     class SearchResultViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mSearchResultTV;
+        private TextView mSearchResultDescriptionTV;
+        private ImageView mRecipeImage;
 
         SearchResultViewHolder(View itemView) {
             super(itemView);
             mSearchResultTV = itemView.findViewById(R.id.tv_recipe_title);
+            mRecipeImage = itemView.findViewById(R.id.iv_recipe_image);
             itemView.setOnClickListener(this);
         }
 
         void bind(Recipes recipe) {
             Log.d(TAG, recipe.label);
             mSearchResultTV.setText(recipe.label);
+            /*Glide.with(mRecipeImage.getContext()).load(recipe.image).into(mRecipeImage);*/
+
+            String description = recipe.servings + " Servings | " + recipe.calories + " Calories";
+            mSearchResultDescriptionTV.setText(description);
         }
 
         @Override
@@ -71,7 +80,5 @@ public class RecipeSearchAdapter extends RecyclerView.Adapter<RecipeSearchAdapte
             Recipes recipe = mSearchResultsList.get(getAdapterPosition());
             mResultClickListener.onSearchResultClicked(recipe);
         }
-
     }
-
 }

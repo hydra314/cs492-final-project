@@ -57,6 +57,7 @@ public class EdamamUtils {
             for(RecipeListItem listItem : results.hits) {
                 Recipes recipe = new Recipes();
                 recipe.label = listItem.recipe.label;
+                recipe.image = listItem.recipe.image;
                 recipe.calories = (int)listItem.recipe.calories;
                 recipe.source = listItem.recipe.source;
                 recipe.source_url = listItem.recipe.source_url;

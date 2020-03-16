@@ -11,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/iv_recipe_icon"
+            android:id="@+id/iv_recipe_image"
             android:padding="8dp"
             android:layout_width="72dp"
             android:layout_height="72dp" />
