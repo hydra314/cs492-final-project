@@ -1,9 +1,9 @@
+
 package com.example.android.githubsearchwithsqlite.data;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
-import com.example.android.githubsearchwithsqlite.utils.EdamamUtils;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
@@ -13,14 +13,14 @@ public class SavedRecipesRepository {
 
     public SavedRecipesRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
-        mDAO = db.savedReposDao();
+        mDAO = db.savedRecipesDao();
     }
 
     public void insertSavedRecipe(Recipes recipe) {
         new InsertAsyncTask(mDAO).execute(recipe);
     }
 
-    public void deleteSavedRepo(Recipes recipe) {
+    public void deleteSavedRecipe(Recipes recipe) {
         new DeleteAsyncTask(mDAO).execute(recipe);
     }
 
