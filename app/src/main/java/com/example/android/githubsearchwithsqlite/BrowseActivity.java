@@ -16,11 +16,11 @@ import java.util.List;
 public class BrowseActivity extends AppCompatActivity
     implements RecipeSearchAdapter.OnSearchResultClickListener {
     private static String TAG = BrowseActivity.class.getSimpleName();
-    private RecyclerView mBrowseRecipeItems;
     private int tempAPICALLLIMIT = 0;
 
     private RecipeSearchAdapter mRecipeSearchAdapter;
     private RecipeSearchViewModel mViewModel;
+    private RecyclerView browseRecipesRV;
 
 
     @Override
@@ -28,12 +28,12 @@ public class BrowseActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse);
 
-        RecyclerView browseRecipesRV = findViewById(R.id.rv_browse_recipes);
+        browseRecipesRV = findViewById(R.id.rv_browse_recipes);
         browseRecipesRV.setLayoutManager(new LinearLayoutManager(this));
         browseRecipesRV.setHasFixedSize(true);
 
         mRecipeSearchAdapter = new RecipeSearchAdapter(this);
-        mBrowseRecipeItems.setAdapter(mRecipeSearchAdapter);
+        browseRecipesRV.setAdapter(mRecipeSearchAdapter);
 
         mViewModel = new ViewModelProvider(this).get(RecipeSearchViewModel.class);
 
