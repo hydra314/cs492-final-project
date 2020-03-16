@@ -9,7 +9,10 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "recipes")
 public class Recipes implements Serializable {
+    @NonNull
+    @PrimaryKey
     public String label;
+
     public int calories;
     public String servings;
     public String source;

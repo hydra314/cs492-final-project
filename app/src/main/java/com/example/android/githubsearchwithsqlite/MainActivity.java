@@ -20,13 +20,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.android.githubsearchwithsqlite.data.Recipes;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity
+        implements RecipeSearchAdapter.OnSearchResultClickListener, NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = MainActivity.class.getSimpleName();
-    private RecyclerView mSavedRecipesRV;
+    private SavedRecipesViewModel mViewModel;
     private DrawerLayout mDrawerLayout;
 
     @Override
@@ -41,15 +43,32 @@ public class MainActivity extends AppCompatActivity, NavigationView.OnNavigation
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_nav_menu);
 
-        mSavedRecipesRV = findViewById(R.id.rv_saved_recipes);
-        mSavedRecipesRV.setLayoutManager(new LinearLayoutManager(this));
-        mSavedRecipesRV.setHasFixedSize(true);
+        RecyclerView savedRecipesRV = findViewById(R.id.rv_saved_recipes);
+        savedRecipesRV.setLayoutManager(new LinearLayoutManager(this));
+        savedRecipesRV.setHasFixedSize(true);
+
+        final RecipeSearchAdapter adapter = new RecipeSearchAdapter(this);
+        savedRecipesRV.setAdapter(adapter);
+
+        mViewModel = new ViewModelProvider(
+                this,
+                new ViewModelProvider.AndroidViewModelFactory(getApplication())
+        ).get(SavedRecipesViewModel.class);
+
+        mViewModel.getAllRecipes().observe(this, new Observer<List<Recipes>>() {
+            @Override
+            public void onChanged(List<Recipes> recipes) {
+                adapter.updateSearchResults(recipes);
+            }
+        });
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
+
 
         NavigationView navigationView = findViewById(R.id.nv_nav_drawer);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -68,10 +87,6 @@ public class MainActivity extends AppCompatActivity, NavigationView.OnNavigation
         switch (item.getItemId()) {
             case R.id.nav_saved_recipes:
                 return true;
-            case R.id.nav_search:
-                Intent searchRecipesIntent = new Intent(this, SearchActivity.class);
-                startActivity(searchRecipesIntent);
-                return true;
             case R.id.nav_browse:
                 Intent browseRecipesIntent = new Intent(this, BrowseActivity.class);
                 startActivity(browseRecipesIntent);
@@ -81,4 +96,10 @@ public class MainActivity extends AppCompatActivity, NavigationView.OnNavigation
         }
     }
 
+    @Override
+    public void onSearchResultClicked(Recipes recipe) {
+        Intent intent = new Intent(this, RecipeDetailActivity.class);
+        intent.putExtra(RecipeDetailActivity.EXTRA_RECIPE, recipe);
+        startActivity(intent);
+    }
 }
