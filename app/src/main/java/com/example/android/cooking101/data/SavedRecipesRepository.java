@@ -1,4 +1,5 @@
-package com.example.android.githubsearchwithsqlite.data;
+
+package com.example.android.cooking101.data;
 
 import android.app.Application;
 import android.os.AsyncTask;
@@ -34,8 +35,8 @@ public class SavedRecipesRepository {
         }
 
         @Override
-        protected Void doInBackground(Recipes... recipe) {
-            mAsyncTaskDAO.insert(recipe[0]);
+        protected Void doInBackground(Recipes... recipes) {
+            mAsyncTaskDAO.insert(recipes[0]);
             return null;
         }
     }
@@ -47,8 +48,8 @@ public class SavedRecipesRepository {
         }
 
         @Override
-        protected Void doInBackground(Recipes... recipe) {
-            mAsyncTaskDAO.delete(recipe[0]);
+        protected Void doInBackground(Recipes... gitHubRepos) {
+            mAsyncTaskDAO.delete(gitHubRepos[0]);
             return null;
         }
     }

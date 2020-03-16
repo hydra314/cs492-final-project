@@ -1,12 +1,11 @@
-package com.example.android.githubsearchwithsqlite.utils;
+package com.example.android.cooking101.utils;
 
 import android.net.Uri;
 import android.util.Log;
 
-import com.example.android.githubsearchwithsqlite.data.Recipes;
+import com.example.android.cooking101.data.Recipes;
 import com.google.gson.Gson;
 
-import java.net.URI;
 import java.util.ArrayList;
 
 public class EdamamUtils {

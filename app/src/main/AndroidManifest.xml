@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android.githubsearchwithsqlite">
+    package="com.example.android.cooking101">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -16,6 +16,9 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".BrowseActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".SearchActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"

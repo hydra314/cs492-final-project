@@ -1,4 +1,4 @@
-package com.example.android.githubsearchwithsqlite;
+package com.example.android.cooking101;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -8,19 +8,14 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
-import com.example.android.githubsearchwithsqlite.data.Recipes;
+import com.example.android.cooking101.data.Recipes;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
@@ -86,6 +81,10 @@ public class MainActivity extends AppCompatActivity
         mDrawerLayout.closeDrawers();
         switch (item.getItemId()) {
             case R.id.nav_saved_recipes:
+                return true;
+            case R.id.nav_search:
+                Intent searchRecipesIntent = new Intent(this, SearchActivity.class);
+                startActivity(searchRecipesIntent);
                 return true;
             case R.id.nav_browse:
                 Intent browseRecipesIntent = new Intent(this, BrowseActivity.class);

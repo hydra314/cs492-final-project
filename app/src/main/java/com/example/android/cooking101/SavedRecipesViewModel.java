@@ -1,12 +1,12 @@
-package com.example.android.githubsearchwithsqlite;
+package com.example.android.cooking101;
 
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.android.githubsearchwithsqlite.data.Recipes;
-import com.example.android.githubsearchwithsqlite.data.SavedRecipesRepository;
+import com.example.android.cooking101.data.Recipes;
+import com.example.android.cooking101.data.SavedRecipesRepository;
 
 import java.util.List;
 
