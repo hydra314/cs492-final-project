@@ -1,17 +1,25 @@
 package com.example.android.cooking101;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.android.cooking101.data.Recipes;
+
+import java.util.List;
 
 public class RecipeDetailActivity extends AppCompatActivity {
     public static final String EXTRA_RECIPE = "Recipe";
@@ -78,5 +86,50 @@ public class RecipeDetailActivity extends AppCompatActivity {
         recipeNameTV.setText(mRecipe.label);
 
         Glide.with(this).load(recipe.image).into(mRecipeImageTV);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.recipe_detail, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_view_recipe:
+                viewRecipeOnWeb();
+                return true;
+            case R.id.action_share:
+                shareRecipe();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void shareRecipe() {
+        if (mRecipe != null) {
+            String shareText= getString(R.string.share_recipe_text, mRecipe.label, mRecipe.source_url);
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+            shareIntent.setType("text/plain");
+
+            Intent chooserIntent = Intent.createChooser(shareIntent, null);
+            startActivity(chooserIntent);
+        }
+    }
+
+    private void viewRecipeOnWeb() {
+        if (mRecipe != null) {
+            Uri recipeUri = Uri.parse(mRecipe.source_url);
+            Intent webIntent = new Intent(Intent.ACTION_VIEW, recipeUri);
+
+            PackageManager pm = getPackageManager();
+            List<ResolveInfo> activities = pm.queryIntentActivities(webIntent, PackageManager.MATCH_DEFAULT_ONLY);
+            if (activities.size() > 0) {
+                startActivity(webIntent);
+            }
+        }
     }
 }

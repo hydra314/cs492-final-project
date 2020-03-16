@@ -9,7 +9,7 @@
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/action_view_repo"
-        android:title="View repo on GitHub"
+        android:id="@+id/action_view_recipe"
+        android:title="View recipe in browser"
         app:showAsAction="never"/>
 </menu>

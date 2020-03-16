@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.cooking101.data.Recipes;
 import com.example.android.cooking101.data.Status;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class BrowseActivity extends AppCompatActivity
     implements RecipeSearchAdapter.OnSearchResultClickListener {
@@ -27,6 +29,19 @@ public class BrowseActivity extends AppCompatActivity
     private RecyclerView browseRecipesRV;
     private TextView mErrorMessageTV;
     private ProgressBar mLoadingIndicatorPB;
+
+    private List<String> mFoodItems = Arrays.asList(
+            "Chicken",
+            "Pork",
+            "Steak",
+            "Soup",
+            "Bread",
+            "Pasta",
+            "Pie",
+            "Beverage",
+            "Vegetarian"
+    );
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +89,9 @@ public class BrowseActivity extends AppCompatActivity
 
         if(tempAPICALLLIMIT == 0) {
             tempAPICALLLIMIT = 1;
-            mViewModel.loadSearchResults("chicken");
+            Random rand = new Random();
+            mViewModel.loadSearchResults(mFoodItems.get(rand.nextInt(mFoodItems.size())));
         }
-
     }
 
     @Override
@@ -85,6 +100,4 @@ public class BrowseActivity extends AppCompatActivity
         intent.putExtra(RecipeDetailActivity.EXTRA_RECIPE, recipe);
         startActivity(intent);
     }
-
-
 }
