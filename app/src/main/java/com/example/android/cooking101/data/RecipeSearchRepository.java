@@ -1,5 +1,6 @@
 package com.example.android.cooking101.data;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.android.cooking101.utils.EdamamUtils;
@@ -42,13 +43,21 @@ public class RecipeSearchRepository implements RecipeSearchAsyncTask.Callback {
         }
     }
 
-    public void loadSearchResults(String query) {
-        mCurrentQuery= query;
-        String url = EdamamUtils.buildEdamamSearchURL(query);
-        mSearchResults.setValue(null);
-        Log.d(TAG, "executing search with url: " + url);
-        mLoadingStatus.setValue(Status.LOADING);
+    private boolean shouldExecuteSearch(String query) {
+        return !TextUtils.equals(query, mCurrentQuery);
+    }
 
-        new RecipeSearchAsyncTask(this).execute(url);
+    public void loadSearchResults(String query) {
+        if (shouldExecuteSearch(query)) {
+            mCurrentQuery = query;
+            String url = EdamamUtils.buildEdamamSearchURL(query);
+            mSearchResults.setValue(null);
+            Log.d(TAG, "executing search with url: " + url);
+            mLoadingStatus.setValue(Status.LOADING);
+            new RecipeSearchAsyncTask(this).execute(url);
+        }
+        else {
+            Log.d(TAG, "using cached search results");
+        }
     }
 }
