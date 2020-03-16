@@ -36,6 +36,18 @@ public class EdamamUtils {
         String source_url;
         double calories;
         double yield;
+        Nutrients totalNutrients;
+    }
+
+    static class Nutrients {
+        NutrientDetails FAT;
+        NutrientDetails CHOCDF;
+        NutrientDetails PROCNT;
+    }
+
+    static class NutrientDetails {
+        String label;
+        double quantity;
     }
 
     public static String buildEdamamSearchURL(String q) {
@@ -61,10 +73,12 @@ public class EdamamUtils {
                 recipe.source = listItem.recipe.source;
                 recipe.source_url = listItem.recipe.source_url;
                 recipe.servings = Integer.toString((int)listItem.recipe.yield);
+                recipe.fat = (int)listItem.recipe.totalNutrients.FAT.quantity;
+                recipe.carbs = (int)listItem.recipe.totalNutrients.CHOCDF.quantity;
+                recipe.protein = (int)listItem.recipe.totalNutrients.PROCNT.quantity;
 
                 recipeItems.add(recipe);
             }
-
             return recipeItems;
 
         } else {

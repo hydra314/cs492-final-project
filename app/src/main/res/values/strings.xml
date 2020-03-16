@@ -12,5 +12,8 @@
     <string name="nav_browse">Browse</string>
 
     <string name="saved_recipes_title">Saved Recipes</string>
-    <string name="saved_recipes_tip">Build your recipe collection by browsing or searching our recipes!</string>
+    <string name="saved_recipes_tip">Browse or Search to build your collection!</string>
+
+    <string name="recipe_details_header">Recipe Details</string>
+    <string name="recipe_macros_header">Recipe Macros</string>
 </resources>

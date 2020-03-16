@@ -30,6 +30,12 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
 
     private TextView recipeNameTV;
+    private TextView recipeSourceTV;
+    private TextView recipeServingsTV;
+    private TextView recipeCaloriesTV;
+    private TextView recipeFatTV;
+    private TextView recipeCarbsTV;
+    private TextView recipeProteinTV;
     private ImageView mRecipeImageTV;
 
 
@@ -39,6 +45,12 @@ public class RecipeDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_detail);
 
         recipeNameTV = findViewById(R.id.tv_recipe_name);
+        recipeSourceTV = findViewById(R.id.tv_source);
+        recipeServingsTV = findViewById(R.id.tv_servings);
+        recipeCaloriesTV = findViewById(R.id.tv_calories);
+        recipeFatTV = findViewById(R.id.tv_fat);
+        recipeCarbsTV = findViewById(R.id.tv_carbs);
+        recipeProteinTV = findViewById(R.id.tv_protein);
         mRecipeImageTV = findViewById(R.id.iv_recipe_image);
 
         mViewModel = new ViewModelProvider(
@@ -49,8 +61,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent != null && intent.hasExtra(EXTRA_RECIPE)) {
             mRecipe = (Recipes)intent.getSerializableExtra(EXTRA_RECIPE);
-
-
             fillInLayout(mRecipe);
         }
 
@@ -84,7 +94,13 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
     private void fillInLayout(Recipes recipe) {
         recipeNameTV.setText(mRecipe.label);
+        recipeSourceTV.setText("Source: " + mRecipe.source);
+        recipeServingsTV.setText("Servings: " + mRecipe.servings);
+        recipeCaloriesTV.setText("Calories: " + mRecipe.calories);
 
+        recipeFatTV.setText("Fat: " + mRecipe.fat + "g");
+        recipeCarbsTV.setText("Servings: " + mRecipe.carbs + "g");
+        recipeProteinTV.setText("Servings: " + mRecipe.protein + "g");
         Glide.with(this).load(recipe.image).into(mRecipeImageTV);
     }
 
